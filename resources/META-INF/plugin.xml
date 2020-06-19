@@ -1,0 +1,34 @@
+<idea-plugin>
+  <id>com.telesoftas.ijplugin.gitconfigcommittemplate</id>
+  <name>Git Config Commit Template</name>
+  <version>0.1</version>
+  <vendor email="marius.kavoliunas@telesoftas.com" url="https://www.telesoftas.com">TeleSoftas</vendor>
+
+  <description><![CDATA[
+      Plugin imitates default functionality from git command line
+      to use commit message templates and ignore commented lines
+    ]]></description>
+
+  <!--  <change-notes><![CDATA[-->
+  <!--      First nice release ;)-->
+  <!--    ]]></change-notes>-->
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="193.0"/>
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.vcs</depends>
+  <depends>Git4Idea</depends>
+
+  <!--  <extensions defaultExtensionNs="com.intellij">-->
+  <!--    <projectConfigurable groupId="tools" displayName="Commit Message Template" id="preferences.CommitMessageTemplateConfigurable" instance="commitmessagetemplate.CommitMessageTemplateConfigurable" />-->
+  <!--    <projectService serviceInterface="commitmessagetemplate.CommitMessageTemplateConfig" serviceImplementation="commitmessagetemplate.CommitMessageTemplateConfig"/>-->
+  <!--  </extensions>-->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <vcs.commitMessageProvider implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CommitTemplateMessageProvider" />
+    <checkinHandlerFactory implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CommitTemplateCheckinHandlerFactory" order="last" />
+  </extensions>
+
+</idea-plugin>
