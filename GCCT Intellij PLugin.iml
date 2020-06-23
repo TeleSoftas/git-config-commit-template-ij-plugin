@@ -12,5 +12,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-sdk-2.13.2" level="application" />
+    <orderEntry type="library" name="org.scalactic:scalactic_2.13:3.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="org.scalatest:scalatest_2.13:3.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="org.mockito:mockito-scala_2.13:1.14.7" level="project" />
   </component>
 </module>
