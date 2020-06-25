@@ -3,7 +3,6 @@ package com.telesoftas.ijplugin.gitconfigcommittemplate
 import java.io._
 
 import com.intellij.openapi.project._
-import com.intellij.openapi.vfs._
 import org.mockito.ArgumentMatchersSugar
 import org.mockito.MockitoSugar
 import org.scalatest.flatspec._
@@ -32,16 +31,13 @@ class ImplicitApisTest extends AnyFlatSpec with Matchers with MockitoSugar with 
   }
 
   "ImplicitProjectApi" should "find repoRoot" in {
-    val repoRoot            = mock[VirtualFile]
-    val mockLocalFileSystem = mock[LocalFileSystem]
-    when(mockLocalFileSystem.findFileByIoFile(any[File])).thenReturn(repoRoot)
-    val mockProject         = mock[Project]
+    val mockProject = mock[Project]
 
     when(mockProject.getProjectFilePath).thenReturn("src/test/resources/")
-    mockProject.repoRoot(mockLocalFileSystem) shouldBe Some(repoRoot)
+    mockProject.repoRoot shouldBe defined
 
     when(mockProject.getProjectFilePath).thenReturn("/")
-    mockProject.repoRoot(mockLocalFileSystem) shouldBe empty
+    mockProject.repoRoot shouldBe empty
   }
 
 }

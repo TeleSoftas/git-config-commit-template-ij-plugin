@@ -2,7 +2,7 @@ package com.telesoftas.ijplugin.gitconfigcommittemplate.wrapper
 
 import com.intellij.openapi._
 import com.intellij.vcs.commit._
-import com.telesoftas.ijplugin.gitconfigcommittemplate.wrapper.CommitMessage._
+import com.telesoftas.ijplugin.gitconfigcommittemplate.testutil._
 import org.mockito.ArgumentMatchersSugar
 import org.mockito.MockitoSugar
 import org.scalatest.flatspec._
@@ -19,11 +19,7 @@ class CommitMessageTest extends AnyFlatSpec with Matchers with MockitoSugar with
   }
 
   it should "pass get/set commit message to handler" in {
-    val workflowUi = mock[CommitWorkflowUi]
-    val messageUi  = mock[CommitMessageUi]
-    when(workflowUi.getCommitMessageUi).thenReturn(messageUi)
-    val handler    = mock[MockCommitMessageHandler]
-    when(handler.getUi).thenReturn(workflowUi)
+    val (handler, messageUi) = MockCommitMessageHandler.context
 
     when(messageUi.getText).thenReturn("Message")
     CommitMessage(handler).map(_.get) shouldBe Some("Message")
@@ -31,7 +27,5 @@ class CommitMessageTest extends AnyFlatSpec with Matchers with MockitoSugar with
     CommitMessage(handler).foreach(_.set("Message"))
     verify(messageUi).setText("Message")
   }
-
-  abstract class MockCommitMessageHandler extends CommitMessageHandler
 
 }

@@ -3,10 +3,9 @@ package com.telesoftas.ijplugin
 import java.io._
 
 import com.intellij.openapi.project._
-import com.intellij.openapi.vfs._
 
 import scala.io._
-import scala.util.Try
+import scala.util._
 
 package object gitconfigcommittemplate {
 
@@ -34,11 +33,16 @@ package object gitconfigcommittemplate {
   }
 
   implicit class ImplicitProjectApi(project: Project) {
-    def repoRoot(lfs: LocalFileSystem = LocalFileSystem.getInstance()): Option[VirtualFile] = {
-      val projectRoot = new File(project.getProjectFilePath).getAbsoluteFile
-      val repoRoot    = projectRoot.lookUp(_.contents.exists(f => f.isDirectory && f.getName == ".git"))
-      repoRoot.map(lfs.findFileByIoFile)
-    }
+    def repoRoot: Option[File] =
+      new File(project.getProjectFilePath)
+        .getAbsoluteFile
+        .lookUp(_.contents.exists(f => f.isDirectory && f.getName == ".git"))
+  }
+
+  implicit class ImplicitCastingApi(a: Any) {
+    def doIf[A, B](clazz: Class[A])(f: A => Option[B]): Option[B] =
+      if (clazz.isInstance(a)) Some(f(clazz.cast(a))).flatten
+      else None
   }
 
 }
