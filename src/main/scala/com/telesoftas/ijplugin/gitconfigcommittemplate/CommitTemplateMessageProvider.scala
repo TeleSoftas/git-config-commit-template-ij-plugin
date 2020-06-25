@@ -11,13 +11,15 @@ class CommitTemplateMessageProvider extends CommitMessageProvider {
   protected val git: Option[Git]                  = None
   protected val executor: Option[CommandExecutor] = None
 
-  override def getCommitMessage(localChangeList: LocalChangeList, project: Project): String =
+  override def getCommitMessage(localChangeList: LocalChangeList, project: Project): String = {
+    val comment = localChangeList.getComment
     wrapper
       .MessageTemplate(
         project,
         git.getOrElse(Git.getInstance()),
         executor.getOrElse(gitCommandExecutor),
       )
-      .map(_(localChangeList.getComment))
-      .getOrElse(localChangeList.getComment)
+      .map(_(comment))
+      .getOrElse(comment)
+  }
 }
