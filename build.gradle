@@ -1,0 +1,40 @@
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+
+plugins {
+    id 'org.jetbrains.intellij' version '0.4.21'
+    id 'scala'
+}
+
+group 'com.telesoftas.ijplugin.gitconfigcommittemplate'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+intellij {
+    version '2019.3.5'
+    plugins = [ 'git4idea' ]
+}
+
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+    sinceBuild '193.0'
+    untilBuild ''
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.13.2'
+    compile 'org.scalactic:scalactic_2.13:3.2.0'
+
+    testCompile 'org.scalatest:scalatest_2.13:3.2.0'
+    testCompile 'org.mockito:mockito-scala_2.13:1.14.7'
+}
+
+task scalatests(dependsOn: ['testClasses'], type: JavaExec) {
+    main = 'org.scalatest.tools.Runner'
+    args = ['-R', 'build/classes/scala/test', '-o']
+    classpath = sourceSets.test.runtimeClasspath
+}
