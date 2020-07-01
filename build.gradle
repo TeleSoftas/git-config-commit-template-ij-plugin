@@ -5,8 +5,9 @@ plugins {
     id 'scala'
 }
 
+def build = System.getenv('BUILD_NUMBER') ?: "#"
 group 'com.telesoftas.ijplugin.gitconfigcommittemplate'
-version '1.0-SNAPSHOT'
+version "0.1-$build"
 
 repositories {
     mavenCentral()
