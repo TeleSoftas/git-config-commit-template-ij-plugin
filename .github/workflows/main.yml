@@ -34,12 +34,12 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Run Tests
-        run: ./gradlew scalatest
+#      - name: Run Tests
+#        run: ./gradlew scalatest
 
       - name: Package Plugin
         run: ./gradlew assemble
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           path: build/distributions/Git_Config_Commit_Template-1.0-*.zip
