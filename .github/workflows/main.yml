@@ -21,6 +21,7 @@ jobs:
 
       - name: Generate build number
         uses: einaregilsson/build-number@v2
+        id: buildnumber
         with:
           token: ${{secrets.github_token}}
 
@@ -39,5 +40,5 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: "IntelliJ GCCT Plugin Bundle ($BUILD_NUMBER build ${{ steps.buildnumber.outputs.build_number }})"
+          name: "IntelliJ GCCT Plugin Bundle (build ${{ steps.buildnumber.outputs.build_number }})"
           path: build/distributions/Git_Config_Commit_Template-*.zip
