@@ -8,7 +8,7 @@ import com.intellij.openapi.vcs.checkin.CheckinHandler._
 import com.intellij.openapi.vcs.checkin._
 import com.intellij.openapi.vcs.ui._
 import com.telesoftas.ijplugin.gitconfigcommittemplate.wrapper.CommitMessage
-import com.telesoftas.ijplugin.gitconfigcommittemplate.wrapper.CommitMessage.CommitMessageHandler
+import com.telesoftas.ijplugin.gitconfigcommittemplate.wrapper.CommitMessage._
 
 class CustomCheckinHandler extends CheckinHandler {
 
@@ -33,9 +33,10 @@ class CustomCheckinHandler extends CheckinHandler {
     } else super.beforeCheckin()
 
   private def filteredMessage(commitMessage: CommitMessage): Option[String] = {
-    val trimmed = commitMessage.get.trim
-    if (trimmed.startsWith("#")) None
-    else Some(trimmed.split("\n").filterNot(_.trim.startsWith("#")).mkString("\n"))
+    val trimmedInLines = commitMessage.get.trim.split("\n")
+    val usefulLines    = trimmedInLines.filterNot(line => line.trim.isEmpty || line.startsWith("#"))
+    if (usefulLines.isEmpty) None
+    else Some(trimmedInLines.filterNot(_.trim.startsWith("#")).mkString("\n"))
   }
 
 }

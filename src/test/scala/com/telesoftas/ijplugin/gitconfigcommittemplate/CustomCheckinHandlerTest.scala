@@ -1,12 +1,13 @@
 package com.telesoftas.ijplugin.gitconfigcommittemplate
 
-import com.intellij.openapi.Disposable
-import com.intellij.openapi.vcs.checkin.CheckinHandler.ReturnResult
-import com.telesoftas.ijplugin.gitconfigcommittemplate.testutil.MockCommitMessageHandler
+import com.intellij.openapi._
+import com.intellij.openapi.vcs.checkin.CheckinHandler._
+import com.telesoftas.ijplugin.gitconfigcommittemplate.testutil._
 import org.mockito.ArgumentMatchersSugar
 import org.mockito.MockitoSugar
-import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should._
+import org.scalatest.prop.Tables._
 
 class CustomCheckinHandlerTest extends AnyFlatSpec with Matchers with MockitoSugar with ArgumentMatchersSugar {
 
@@ -45,19 +46,22 @@ class CustomCheckinHandlerTest extends AnyFlatSpec with Matchers with MockitoSug
     )
   }
 
-  it should "not allow first commented line" in {
-    val (handler, messageUi) = MockCommitMessageHandler.context
+  it should "validate commit messages" in {
+    Table(
+      ("commit message", "expected result"),
+      ("# comment\n\n# comment\n", ReturnResult.CANCEL),
+      ("# comment\n\n# comment\nFirst Line", ReturnResult.COMMIT),
+      ("# comment\n\n# comment\n@First Line", ReturnResult.COMMIT),
+    ).forEvery { (message, expectedResult) =>
+      val (handler, messageUi) = MockCommitMessageHandler.context
 
-    val sut = new CustomCheckinHandler
-    sut.getAfterCheckinConfigurationPanel(handler)
+      val sut = new CustomCheckinHandler
+      sut.getAfterCheckinConfigurationPanel(handler)
 
-    when(messageUi.getText).thenReturn(
-      """|# forbidden line
-         |Line one
-         |Line two""".stripMargin,
-    )
+      when(messageUi.getText).thenReturn(message)
 
-    sut.beforeCheckin() shouldBe ReturnResult.CANCEL
+      sut.beforeCheckin() shouldBe expectedResult
+    }
   }
 
 }
