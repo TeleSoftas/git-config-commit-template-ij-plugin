@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="pluginIcon.svg"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 10.583333 10.583333"
+   height="40"
+   width="40">
+  <defs
+     id="defs2">
+    <mask
+       id="git-b"
+       fill="#fff">
+      <polygon
+         points="0,32 0,0.001 32,0.001 32,32 "
+         id="use5"
+         transform="scale(0.26458333)" />
+    </mask>
+    <mask
+       id="git-b-7"
+       fill="#fff">
+      <polygon
+         points="0,32 0,0.001 32,0.001 32,32 "
+         id="use5-9"
+         transform="scale(0.26458333)" />
+    </mask>
+    <mask
+       id="git-b-2"
+       fill="#fff">
+      <polygon
+         points="0,32 0,0.001 32,0.001 32,32 "
+         id="use5-0"
+         transform="scale(0.26458333)" />
+    </mask>
+    <mask
+       id="git-b-9"
+       fill="#ffffff">
+      <polygon
+         points="0,32 0,0.001 32,0.001 32,32 "
+         id="use5-2"
+         transform="scale(0.26458333)" />
+    </mask>
+  </defs>
+  <sodipodi:namedview
+     inkscape:snap-others="true"
+     inkscape:snap-nodes="true"
+     inkscape:snap-grids="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-paths="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true"
+     inkscape:snap-text-baseline="true"
+     inkscape:snap-page="true"
+     inkscape:window-maximized="1"
+     inkscape:window-y="0"
+     inkscape:window-x="1974"
+     inkscape:window-height="1172"
+     inkscape:window-width="1866"
+     inkscape:pagecheckerboard="true"
+     units="px"
+     inkscape:showpageshadow="false"
+     showgrid="true"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     inkscape:cy="35.963619"
+     inkscape:cx="28.380874"
+     inkscape:zoom="11.313708"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base">
+    <inkscape:grid
+       empspacing="2"
+       spacingy="0.26458332"
+       spacingx="0.26458332"
+       id="grid10"
+       type="xygrid" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     style="display:inline;opacity:0.992"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       transform="scale(0.26458333)"
+       d="M 9.4160156 12 L 12.123047 14.707031 A 2.456601 2.456601 0 0 1 13 14.542969 A 2.456601 2.456601 0 0 1 15.457031 17 A 2.456601 2.456601 0 0 1 15.292969 17.876953 L 18.123047 20.707031 A 2.456601 2.456601 0 0 1 19 20.542969 A 2.456601 2.456601 0 0 1 21.457031 23 A 2.456601 2.456601 0 0 1 19 25.457031 A 2.456601 2.456601 0 0 1 16.542969 23 A 2.456601 2.456601 0 0 1 16.707031 22.123047 L 14.003906 19.419922 L 14.003906 26.757812 A 2.456601 2.456601 0 0 1 15.457031 29 A 2.456601 2.456601 0 0 1 13 31.457031 A 2.456601 2.456601 0 0 1 10.542969 29 A 2.456601 2.456601 0 0 1 12.003906 26.755859 L 12.003906 19.244141 A 2.456601 2.456601 0 0 1 10.542969 17 A 2.456601 2.456601 0 0 1 10.707031 16.121094 L 8 13.412109 L 8 13.421875 L 8 34 L 22 34 L 38 34 L 38 18 L 32 12 L 22 12 L 9.4160156 12 z M 25 20 L 34 20 L 34 22 L 25 22 L 25 20 z M 25.058594 24 L 34 24 L 34 26 L 25.058594 26 L 25.058594 24 z M 25.058594 28 L 34 28 L 34 30 L 25.058594 30 L 25.058594 28 z "
+       style="fill:#f05133;fill-opacity:1;stroke-width:0.999999;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect1272" />
+    <path
+       transform="scale(0.26458333)"
+       d="M 3.4160156 6 L 6.1210938 8.7070312 A 2.456601 2.456601 0 0 1 6.9980469 8.5429688 A 2.456601 2.456601 0 0 1 9.4550781 11 A 2.456601 2.456601 0 0 1 9.2910156 11.876953 L 9.4140625 12 L 9.828125 12 L 14 12 L 16 12 L 32 12 L 26 6 L 16 6 L 14 6 L 8 6 L 3.4160156 6 z M 2 7.4160156 L 2 12 L 2 28 L 8 28 L 8 25.242188 A 2.456601 2.456601 0 0 1 6.9980469 25.457031 A 2.456601 2.456601 0 0 1 4.5410156 23 A 2.456601 2.456601 0 0 1 6.0019531 20.755859 L 6.0019531 13.244141 A 2.456601 2.456601 0 0 1 4.5410156 11 A 2.456601 2.456601 0 0 1 4.7050781 10.121094 L 2 7.4160156 z "
+       style="display:inline;fill:#33b8f0;fill-opacity:1;stroke-width:0.999999;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect1272-0" />
+    <g
+       fill="none"
+       fill-rule="evenodd"
+       transform="translate(4,4)"
+       id="g10">
+      <mask
+         id="mask126"
+         fill="#fff">
+        <polygon
+           points="0,32 0,0.001 32,0.001 32,32 "
+           id="use124"
+           transform="scale(0.26458333)" />
+      </mask>
+      <path
+         fill="#DE4C36"
+         d="M31.3969,14.5745 L17.4249,0.6035 C16.6209,-0.2005 15.3159,-0.2005 14.5109,0.6035 L11.6099,3.5045 L15.2899,7.1855 C16.1449,6.8965 17.1259,7.0905 17.8079,7.7715 C18.4929,8.4575 18.6849,9.4475 18.3889,10.3045 L21.9359,13.8515 C22.7939,13.5565 23.7849,13.7475 24.4689,14.4345 C25.4269,15.3915 25.4269,16.9435 24.4689,17.9025 C23.5109,18.8605 21.9589,18.8605 21.0009,17.9025 C20.2809,17.1805 20.1029,16.1225 20.4669,15.2345 L17.1599,11.9275 L17.1599,20.6315 C17.3989,20.7495 17.6179,20.9075 17.8079,21.0955 C18.7649,22.0525 18.7649,23.6055 17.8079,24.5635 C16.8489,25.5215 15.2969,25.5215 14.3399,24.5635 C13.3819,23.6055 13.3819,22.0525 14.3399,21.0955 C14.5699,20.8665 14.8419,20.6845 15.1429,20.5605 L15.1429,11.7745 C14.8419,11.6515 14.5689,11.4705 14.3399,11.2395 C13.6149,10.5145 13.4399,9.4495 13.8119,8.5585 L10.1839,4.9305 L0.6039,14.5095 C-0.2021,15.3155 -0.2021,16.6205 0.6039,17.4245 L14.5759,31.3965 C15.3799,32.2005 16.6849,32.2005 17.4899,31.3965 L31.3959,17.4905 C32.2019,16.6845 32.2019,15.3785 31.3959,14.5745"
+         mask="url(#git-b-7)"
+         id="path8" />
+    </g>
+    <g
+       fill="none"
+       fill-rule="evenodd"
+       transform="translate(-136.7466,6.959692)"
+       id="g10-2">
+      <mask
+         id="mask142"
+         fill="#ffffff">
+        <polygon
+           points="0,32 0,0.001 32,0.001 32,32 "
+           id="use140"
+           transform="scale(0.26458333)" />
+      </mask>
+      <path
+         fill="#de4c36"
+         d="M 31.3969,14.5745 17.4249,0.6035 c -0.804,-0.804 -2.109,-0.804 -2.914,0 l -2.901,2.901 3.68,3.681 c 0.855,-0.289 1.836,-0.095 2.518,0.586 0.685,0.686 0.877,1.676 0.581,2.533 l 3.547,3.547 c 0.858,-0.295 1.849,-0.104 2.533,0.583 0.958,0.957 0.958,2.509 0,3.468 -0.958,0.958 -2.51,0.958 -3.468,0 -0.72,-0.722 -0.898,-1.78 -0.534,-2.668 l -3.307,-3.307 v 8.704 c 0.239,0.118 0.458,0.276 0.648,0.464 0.957,0.957 0.957,2.51 0,3.468 -0.959,0.958 -2.511,0.958 -3.468,0 -0.958,-0.958 -0.958,-2.511 0,-3.468 0.23,-0.229 0.502,-0.411 0.803,-0.535 v -8.786 c -0.301,-0.123 -0.574,-0.304 -0.803,-0.535 -0.725,-0.725 -0.9,-1.79 -0.528,-2.681 l -3.628,-3.628 -9.58,9.579 c -0.806,0.806 -0.806,2.111 0,2.915 l 13.972,13.972 c 0.804,0.804 2.109,0.804 2.914,0 l 13.906,-13.906 c 0.806,-0.806 0.806,-2.112 0,-2.916"
+         mask="url(#git-b-9)"
+         id="path8-8" />
+    </g>
+  </g>
+  <g
+     style="display:inline"
+     inkscape:label="Layer 2"
+     id="layer2"
+     inkscape:groupmode="layer" />
+</svg>
