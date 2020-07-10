@@ -6,6 +6,9 @@
   <description><![CDATA[
       Plugin loads commit.template from git config to commit message dialog.
       It also removes commented line from the message.
+      <br />
+      <br />
+      <a href="https://github.com/TeleSoftas/git-config-commit-template-ij-plugin">Source code is in GitHub</a>
     ]]></description>
 
   <idea-version since-build="193.0"/>
