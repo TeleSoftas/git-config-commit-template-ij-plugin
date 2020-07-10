@@ -1,12 +1,11 @@
 <idea-plugin>
   <id>com.telesoftas.ijplugin.gitconfigcommittemplate</id>
   <name>Git Config Commit Template</name>
-  <version>0.1</version>
   <vendor email="marius.kavoliunas@telesoftas.com" url="https://www.telesoftas.com">TeleSoftas</vendor>
 
   <description><![CDATA[
-      Plugin imitates default functionality from git command line
-      to use commit message templates and ignore commented lines
+      Plugin loads commit.template from git config to commit message dialog.
+      It also removes commented line from the message.
     ]]></description>
 
   <idea-version since-build="193.0"/>
