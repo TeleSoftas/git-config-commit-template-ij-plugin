@@ -4,11 +4,8 @@
   <vendor email="marius.kavoliunas@telesoftas.com" url="https://www.telesoftas.com">TeleSoftas</vendor>
 
   <description><![CDATA[
-      Plugin loads commit.template from git config to commit message dialog.
-      It also removes commented line from the message.
-      <br />
-      <br />
-      <a href="https://github.com/TeleSoftas/git-config-commit-template-ij-plugin">Source code is in GitHub</a>
+      This Plugin enables Intellij to integrate `git config commit.template` parameter to commit workflow.
+      It also removes commented lines from the message before commit.
     ]]></description>
 
   <idea-version since-build="193.0"/>

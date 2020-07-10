@@ -1,6 +1,6 @@
 # ![Git Config Commit Template](src/main/resources/META-INF/pluginIcon.svg) Git Config Commit Template
 
-This Intellij Plugin enables it to use git config commit.template parameter by default.
+This Plugin enables Intellij to integrate `git config commit.template` parameter to commit workflow.
 
 ## Features
 
