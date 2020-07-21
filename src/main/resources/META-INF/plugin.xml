@@ -8,12 +8,6 @@
       It also removes commented lines from the message before commit.
     ]]></description>
 
-  <change-notes><![CDATA[
-    <ul>
-      <li>Updated plugin description</li>
-    </ul><div width="0" height="0">12345678901234567890<div>
-  ]]></change-notes>
-
   <idea-version since-build="193.0"/>
 
   <depends>com.intellij.modules.vcs</depends>

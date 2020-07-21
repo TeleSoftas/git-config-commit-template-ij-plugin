@@ -20,8 +20,7 @@ intellij {
 
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      Initial "minimum viable product" verson of the plugin"""
     sinceBuild '193.0'
     untilBuild ''
 }
