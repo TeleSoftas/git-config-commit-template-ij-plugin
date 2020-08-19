@@ -1,21 +1,33 @@
 <idea-plugin>
-  <id>com.telesoftas.ijplugin.gitconfigcommittemplate</id>
-  <name>Git Config Commit Template</name>
-  <vendor email="marius.kavoliunas@telesoftas.com" url="https://www.telesoftas.com">TeleSoftas</vendor>
+    <id>com.telesoftas.ijplugin.gitconfigcommittemplate</id>
+    <name>Git Config Commit Template</name>
+    <vendor email="marius.kavoliunas@telesoftas.com" url="https://www.telesoftas.com">TeleSoftas</vendor>
 
-  <description><![CDATA[
+    <description><![CDATA[
       This Plugin enables Intellij to integrate `git config commit.template` parameter to commit workflow.
       It also removes commented lines from the message before commit.
     ]]></description>
 
-  <idea-version since-build="193.0"/>
+    <idea-version since-build="193.0"/>
 
-  <depends>com.intellij.modules.vcs</depends>
-  <depends>Git4Idea</depends>
+    <depends>com.intellij.modules.vcs</depends>
+    <depends>Git4Idea</depends>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <vcs.commitMessageProvider implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CommitTemplateMessageProvider" />
-    <checkinHandlerFactory implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CustomCheckinHandlerFactory" order="last" />
-  </extensions>
+    <actions>
+        <action id="gitconfigcommittemplate.ReloadTemplate" class="com.telesoftas.ijplugin.gitconfigcommittemplate.RefreshCommitMessageAction"
+                text="Reload Commit Template"
+                description="Load commit message template defined in git config"
+                icon="/refresh.svg">
+            <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <vcs.commitMessageProvider
+                implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CommitTemplateMessageProvider"/>
+        <checkinHandlerFactory
+                implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CustomCheckinHandlerFactory"
+                order="last"/>
+    </extensions>
 
 </idea-plugin>
