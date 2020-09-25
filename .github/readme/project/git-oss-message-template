@@ -1,0 +1,8 @@
+<this line could be empty: place for commit message>
+
+
+# Co-authored-by: @member1 <name1.surname@company.com>
+# Co-authored-by: @member2 <name2.surname@company.com>
+# Co-authored-by: @member3 <name3.surname@company.com>
+# Co-authored-by: @member4 <name4.surname@company.com>
+on-behalf-of: @Company <name.surname@company.com>
