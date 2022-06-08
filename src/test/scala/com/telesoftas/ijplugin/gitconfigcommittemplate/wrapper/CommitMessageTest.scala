@@ -11,20 +11,20 @@ import org.scalatest.matchers.should._
 class CommitMessageTest extends AnyFlatSpec with Matchers with MockitoSugar with ArgumentMatchersSugar {
 
   it should "wrap correct WorkflowHandler" in {
-    val correct = mock[CommitMessage.CommitMessageHandler]
+    val correct = mock[CommitMessageField.CommitMessageHandler]
     val wrong   = mock[Disposable]
 
-    CommitMessage(correct) shouldBe defined
-    CommitMessage(wrong) shouldBe empty
+    CommitMessageField(correct) shouldBe defined
+    CommitMessageField(wrong) shouldBe empty
   }
 
   it should "pass get/set commit message to handler" in {
     val (handler, messageUi) = MockCommitMessageHandler.context
 
     when(messageUi.getText).thenReturn("Message")
-    CommitMessage(handler).map(_.get) shouldBe Some("Message")
+    CommitMessageField(handler).map(_.getText) shouldBe Some("Message")
 
-    CommitMessage(handler).foreach(_.set("Message"))
+    CommitMessageField(handler).foreach(_.setText("Message"))
     verify(messageUi).setText("Message")
   }
 
