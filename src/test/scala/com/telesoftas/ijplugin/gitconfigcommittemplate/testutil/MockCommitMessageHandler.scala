@@ -2,7 +2,7 @@ package com.telesoftas.ijplugin.gitconfigcommittemplate.testutil
 
 import com.intellij.vcs.commit.CommitMessageUi
 import com.intellij.vcs.commit.CommitWorkflowUi
-import com.telesoftas.ijplugin.gitconfigcommittemplate.wrapper.CommitMessage.CommitMessageHandler
+import com.telesoftas.ijplugin.gitconfigcommittemplate.wrapper.CommitMessageField.CommitMessageHandler
 import org.mockito.ArgumentMatchersSugar
 import org.mockito.MockitoSugar
 
