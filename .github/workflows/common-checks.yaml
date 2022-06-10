@@ -25,8 +25,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - run: ./gradlew scalatest
-  versions:
-    name: 'Versions are up to date'
+  dependencies:
+    name: 'Dependencies are up to date'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
