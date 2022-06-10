@@ -1,6 +1,10 @@
+import groovy.json.JsonSlurper
+
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 
 plugins {
+    id 'se.patrikerdes.use-latest-versions' version '0.2.18'
+    id 'com.github.ben-manes.versions' version '0.42.0'
     id 'org.jetbrains.intellij' version '0.4.21'
     id 'scala'
 }
@@ -15,7 +19,7 @@ repositories {
 
 intellij {
     version '2019.3.5'
-    plugins = [ 'git4idea' ]
+    plugins = ['git4idea']
 }
 
 patchPluginXml {
@@ -38,3 +42,31 @@ task scalatests(dependsOn: ['testClasses'], type: JavaExec) {
     args = ['-R', 'build/classes/scala/test', '-o']
     classpath = sourceSets.test.runtimeClasspath
 }
+
+def isNonStable = { String version ->
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !(version ==~ regex)
+}
+
+tasks.named("dependencyUpdates").configure {
+    rejectVersionIf {
+        isNonStable(it.candidate.version)
+    }
+}
+
+
+
+tasks.register('verifyDependencyVersions') {
+    dependsOn tasks.dependencyUpdates
+    doLast {
+        def excludes = ["org.jetbrains.intellij.gradle.plugin"]
+        def jsonFile = file('./build/dependencyUpdates/report.json')
+        def report = new JsonSlurper().parseText(jsonFile.text)
+        def updates = report.outdated.dependencies
+                .findAll { !excludes.contains(it.name) }
+                .collect { it.group + "." + it.name + "." + it.version + " -> " + it.available }
+        if (updates.isEmpty()) println "Dependencies are up to date"
+        else throw new GradleException("Dependencies need to be updated:\n" + updates.join('\n'))
+    }
+}
+
