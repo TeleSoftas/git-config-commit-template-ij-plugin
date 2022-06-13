@@ -1,0 +1,40 @@
+name: Generate release artifact
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  assemble-and-pack:
+    name: "Assemble and pack"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 8
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Package Plugin
+        run: ./gradlew assemble
+      - name: Read Artifact Version
+        id: read_version
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "./version"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "Git Config Commit Template IJ Plugin Bundle ${{steps.read_version.outputs.contents}}"
+          path: build/distributions/Git_Config_Commit_Template-*.zip
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "Git Config Commit Template IJ Plugin Bundle ${{steps.read_version.outputs.contents}}"
+          path: README.md
