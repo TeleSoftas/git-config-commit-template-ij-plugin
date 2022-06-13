@@ -25,7 +25,7 @@ intellij {
 
 patchPluginXml {
     changeNotes """
-      Initial "minimum viable product" verson of the plugin"""
+      Update validation and notification presentation as dialog"""
     sinceBuild '193.0'
     untilBuild ''
 }
