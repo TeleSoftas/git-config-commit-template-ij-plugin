@@ -1,0 +1,29 @@
+name: Bump Version
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  bump-version:
+    name: "Bump version"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 8
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - run: ./gradlew bump
+      - uses: EndBug/add-and-commit@v9
+        with:
+          new_branch: ${{ github.event.pull_request.head.ref }}
+          message: 'Bump version number from GH Action'

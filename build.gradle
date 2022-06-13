@@ -9,9 +9,10 @@ plugins {
     id 'scala'
 }
 
-def build = System.getenv('BUILD_NUMBER') ?: "#"
+def versionFile = new File("./version")
+
 group 'com.telesoftas.ijplugin.gitconfigcommittemplate'
-version "0.1-$build"
+version versionFile.text
 
 repositories {
     mavenCentral()
@@ -54,8 +55,6 @@ tasks.named("dependencyUpdates").configure {
     }
 }
 
-
-
 tasks.register('verifyDependencyVersions') {
     dependsOn tasks.dependencyUpdates
     doLast {
@@ -70,3 +69,18 @@ tasks.register('verifyDependencyVersions') {
     }
 }
 
+tasks.register('bump') {
+    doLast {
+        def lastUpdatedVersionFile = new File("./gradle/.lastUpdatedVersion")
+        def userVersion = versionFile.text
+        def version = userVersion.split("\\.")
+        if (userVersion == lastUpdatedVersionFile.text) {
+            version[2]= (version[2].toInteger() + 1).toString()
+        } else {
+            version[2]= 0
+        }
+        userVersion = version.join('.')
+        versionFile.write userVersion
+        lastUpdatedVersionFile.write userVersion
+    }
+}
