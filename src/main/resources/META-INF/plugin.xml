@@ -24,7 +24,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
-                implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CommitTemplateMessageProvider"/>
+                implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.MessageTemplateProvider"/>
         <checkinHandlerFactory
                 implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CustomCheckinHandlerFactory"
                 order="last"/>

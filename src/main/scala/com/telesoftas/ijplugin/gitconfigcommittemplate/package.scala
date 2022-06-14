@@ -1,9 +1,8 @@
 package com.telesoftas.ijplugin
 
-import java.io._
-
 import com.intellij.openapi.project._
 
+import java.io._
 import scala.io._
 import scala.util._
 
