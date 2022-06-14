@@ -28,14 +28,7 @@ class CustomCheckinHandler extends CheckinHandler {
           messageField.setText(message)
           ReturnResult.COMMIT
         case None          =>
-          project.foreach(
-            Messages.showMessageDialog(
-              _,
-              "Specify message in uncommented line",
-              GitBundle.message("git.commit.message.empty.title"),
-              Messages.getErrorIcon,
-            ),
-          )
+          showError()
           ReturnResult.CANCEL
       }
     }
@@ -47,5 +40,15 @@ class CustomCheckinHandler extends CheckinHandler {
     if (finalLines.exists(_.nonEmpty)) Some(finalLines.mkString("\n"))
     else None
   }
+
+  private def showError(): Unit =
+    project.foreach(
+      Messages.showMessageDialog(
+        _,
+        "Specify message in uncommented line",
+        GitBundle.message("git.commit.message.empty.title"),
+        Messages.getErrorIcon,
+      ),
+    )
 
 }

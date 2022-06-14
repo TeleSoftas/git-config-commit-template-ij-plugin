@@ -4,15 +4,14 @@ import com.intellij.openapi.actionSystem.{AnAction, AnActionEvent}
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.vcs.ui.Refreshable
 import com.intellij.openapi.vcs.{CommitMessageI, VcsDataKeys}
-import com.telesoftas.ijplugin.gitconfigcommittemplate.wrapper.MessageTemplate
 
 class RefreshCommitMessageAction extends AnAction with DumbAware {
   override def actionPerformed(e: AnActionEvent): Unit =
     for {
       event           <- Option(e)
       panel           <- resolveCommitPanel(event)
-      messageTemplate <- MessageTemplate(event.getProject)
-      _                = panel.setCommitMessage(messageTemplate.apply(""))
+      messageTemplate <- MessageTemplateProvider().getMessageTemplate(event.getProject)
+      _                = panel.setCommitMessage(messageTemplate)
     } yield ()
 
   private def resolveCommitPanel(e: AnActionEvent): Option[CommitMessageI] =
