@@ -33,6 +33,4 @@ class MessageTemplateProvider(
 
 object MessageTemplateProvider {
   type GitLineHandlerProvider = (Project, File, GitCommand) => GitLineHandler
-
-  def apply(): MessageTemplateProvider = new MessageTemplateProvider()
 }

@@ -2,15 +2,18 @@ package com.telesoftas.ijplugin.gitconfigcommittemplate
 
 import com.intellij.openapi.actionSystem.{AnAction, AnActionEvent}
 import com.intellij.openapi.project.DumbAware
-import com.intellij.openapi.vcs.ui.Refreshable
 import com.intellij.openapi.vcs.{CommitMessageI, VcsDataKeys}
+import com.intellij.openapi.vcs.ui.Refreshable
 
-class RefreshCommitMessageAction extends AnAction with DumbAware {
+class RefreshCommitMessageAction(
+  messageTemplateProvider: MessageTemplateProvider = new MessageTemplateProvider()
+) extends AnAction with DumbAware {
+
   override def actionPerformed(e: AnActionEvent): Unit =
     for {
       event           <- Option(e)
       panel           <- resolveCommitPanel(event)
-      messageTemplate <- MessageTemplateProvider().getMessageTemplate(event.getProject)
+      messageTemplate <- messageTemplateProvider.getMessageTemplate(event.getProject)
       _                = panel.setCommitMessage(messageTemplate)
     } yield ()
 
