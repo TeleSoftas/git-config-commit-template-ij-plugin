@@ -9,10 +9,9 @@ import java.io.File
 import scala.jdk.CollectionConverters._
 import scala.util.Try
 
-class MessageTemplateProvider(
-  git: Git = Git.getInstance(),
-  gitLineHandlerProvider: GitLineHandlerProvider = new GitLineHandler(_, _, _)
-) extends CommitMessageProvider {
+class MessageTemplateProvider(git: Git, gitLineHandlerProvider: GitLineHandlerProvider) extends CommitMessageProvider {
+
+  def this() = this(Git.getInstance(), new GitLineHandler(_, _, _))
 
   override def getCommitMessage(localChangeList: LocalChangeList, project: Project): String = {
     val comment = Option(localChangeList.getComment).filter(_.nonEmpty)

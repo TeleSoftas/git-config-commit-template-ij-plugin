@@ -19,14 +19,14 @@ repositories {
 }
 
 intellij {
-    version '2019.3.5'
+    version '2020.1'
     plugins = ['git4idea']
 }
 
 patchPluginXml {
     changeNotes """
       Update validation and notification presentation as dialog"""
-    sinceBuild '193.0'
+    sinceBuild '201.0'
     untilBuild ''
 }
 
