@@ -25,7 +25,12 @@ intellij {
 
 patchPluginXml {
     changeNotes """
-      Update validation and notification presentation as dialog"""
+      <ul>
+        <li>Getting back to native message loading workflow (removing force load on dialog start)</li>
+        <li>Add manual refresh button to reload template when needed</li>
+        <li>Bump min version to 2020.1 - just in case, for smoth working with panel
+      </ul>
+    """
     sinceBuild '201.0'
     untilBuild ''
 }
