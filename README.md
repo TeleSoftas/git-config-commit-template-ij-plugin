@@ -10,16 +10,25 @@ This Plugin enables Intellij to integrate `git config commit.template` parameter
     ```
     TaskId - message
        
-    description    
+    optional description here    
     ```
     setting template for git repo
-    ```
+    ```bash
     git config commit.template /messageTemplate
     ```
     And now in IntelliJ commit dialog
     
     ![Commit Dialog With Loaded Template](.github/readme/commit-dialog-with-template.png)
-    
+   
+    or panel
+
+    ![Commit Panel With Loaded Template](.github/readme/commit-panel-with-template.png)
+
+* **Refresh Button** - Now You can reload template on demand, without relaying on funky automation. It is set to be green for comfortable eye tracking
+
+    ![Commit Panel With Loaded Template](.github/readme/commit-dialog-refresh-button.png)
+    ![Commit Panel With Loaded Template](.github/readme/commit-panel-refresh-button.png)
+ 
 * **Supports Comments** - Your template can have comment lines, on commit those will be deleted
 
     Template
@@ -34,6 +43,10 @@ This Plugin enables Intellij to integrate `git config commit.template` parameter
     Commit dialog
     
     ![Commit Dialog With Comments](.github/readme/commit-dialog-with-comments.png)
+
+    Commit panel
+
+    ![Commit Panel With Comments](.github/readme/commit-panel-with-comments.png)
     
     After commit
     
