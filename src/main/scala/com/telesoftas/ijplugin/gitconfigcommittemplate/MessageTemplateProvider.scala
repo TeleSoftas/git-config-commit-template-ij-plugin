@@ -24,7 +24,7 @@ class MessageTemplateProvider(
         "git config commit.template",
         "Can not retrieve commit.template",
         message,
-        NotificationType.INFORMATION
+        NotificationType.INFORMATION,
       ),
     ),
   )
@@ -38,7 +38,7 @@ class MessageTemplateProvider(
     val template = for {
       gitCommandResult <- runGitConfigCommitTemplateCommand(project)
       templatePath     <- gitCommandResult.getOutput.asScala.headOption.toEither("path is missing")
-      template         <- new File(templatePath).read
+      template         <- templateFile(project, templatePath).read
     } yield template
     template match {
       case Right(text) => Some(text)
@@ -48,6 +48,10 @@ class MessageTemplateProvider(
         None
     }
   }
+
+  def templateFile(project: Project, templatePath: String): File =
+    if (new File(templatePath).isAbsolute) new File(templatePath)
+    else new File(project.getBasePath, templatePath)
 
   def runGitConfigCommitTemplateCommand(project: Project): Either[Throwable, GitCommandResult] = {
     for {

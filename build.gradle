@@ -25,19 +25,8 @@ intellij {
 
 patchPluginXml {
     changeNotes """
-      <h4>1.1.0</h4>
       <ul>
-        <li>Getting back to native message loading workflow (removing force load on dialog start)</li>
-        <li>Add manual refresh button to reload template when needed</li>
-        <li>Bump min version to 2020.1 - just in case, for smoth working with panel
-      </ul>
-      <h4>1.0.0</h4>
-      <ul>
-        <li>Update validation and notification presentation as dialog</li>
-      </ul>
-      <h4>0.1-27</h4>
-      <ul>
-        <li>Initial "minimum viable product" verson of the plugin</li>
+        <li>Now supports local commit message path</li>
       </ul>
     """
     sinceBuild '201.0'
