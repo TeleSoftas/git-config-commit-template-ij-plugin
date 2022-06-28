@@ -4,10 +4,10 @@ import com.telesoftas.ijplugin.gitconfigcommittemplate.taskid.TaskIdInjector.Tas
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-class TemplateTaskIdFeatureTest extends AnyFlatSpec with Matchers {
+class FillTaskIdLogicTest extends AnyFlatSpec with Matchers {
 
   "TaskId" should "be replaced with emptiness when id is not found" in {
-    val givenTemplate =
+    val givenTemplate   =
       """${TaskId}: # message here
         |
         |# Description""".stripMargin
@@ -19,7 +19,7 @@ class TemplateTaskIdFeatureTest extends AnyFlatSpec with Matchers {
   }
 
   it should "be replaced with GitHub task Id" in {
-    val givenTemplate =
+    val givenTemplate   =
       """${TaskId}: # message here
         |
         |# Description""".stripMargin
@@ -31,7 +31,7 @@ class TemplateTaskIdFeatureTest extends AnyFlatSpec with Matchers {
   }
 
   it should "be replaced with Jira task Id" in {
-    val givenTemplate =
+    val givenTemplate   =
       """${TaskId}: # message here
         |
         |# Description""".stripMargin
@@ -43,7 +43,7 @@ class TemplateTaskIdFeatureTest extends AnyFlatSpec with Matchers {
   }
 
   "GhTaskId" should "be replaced with emptiness when id is not found" in {
-    val givenTemplate =
+    val givenTemplate   =
       """${GhTaskId}: # message here
         |
         |# Description""".stripMargin
@@ -55,7 +55,7 @@ class TemplateTaskIdFeatureTest extends AnyFlatSpec with Matchers {
   }
 
   it should "be replaced with GitHub task Id" in {
-    val givenTemplate =
+    val givenTemplate   =
       """${GhTaskId}: # message here
         |
         |# Description""".stripMargin
@@ -67,7 +67,7 @@ class TemplateTaskIdFeatureTest extends AnyFlatSpec with Matchers {
   }
 
   "JiraTaskId" should "be replaced with emptiness when id is not found" in {
-    val givenTemplate =
+    val givenTemplate   =
       """${JiraTaskId}: # message here
         |
         |# Description""".stripMargin
@@ -79,7 +79,7 @@ class TemplateTaskIdFeatureTest extends AnyFlatSpec with Matchers {
   }
 
   it should "be replaced with Jira task Id" in {
-    val givenTemplate =
+    val givenTemplate   =
       """${JiraTaskId}: # message here
         |
         |# Description""".stripMargin
