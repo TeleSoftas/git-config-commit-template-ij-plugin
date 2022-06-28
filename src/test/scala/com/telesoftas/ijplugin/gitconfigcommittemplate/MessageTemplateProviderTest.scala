@@ -30,7 +30,7 @@ class MessageTemplateProviderTest extends AnyFlatSpec with Matchers with Mockito
   "getMessageTemplate" should "read and return template" in {
     val context  = MockContext()
     val filePath = new File("src/test/resources/nonEmptyFile")
-    when(context.gitCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
+    when(context.gitConfigCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
 
     val sut = new MessageTemplateProvider(context.git, (_, _, _) => context.gitLineHandler, _ => ())
     sut.getMessageTemplate(context.project) should be(Some("contents"))
@@ -39,7 +39,7 @@ class MessageTemplateProviderTest extends AnyFlatSpec with Matchers with Mockito
   it should "not fail when path is incorrect" in {
     val context  = MockContext()
     val filePath = new File("not-existing-file")
-    when(context.gitCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
+    when(context.gitConfigCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
 
     val sut = new MessageTemplateProvider(context.git, (_, _, _) => context.gitLineHandler, _ => ())
     sut.getMessageTemplate(context.project) shouldBe empty
@@ -48,7 +48,7 @@ class MessageTemplateProviderTest extends AnyFlatSpec with Matchers with Mockito
   "getCommitMessage" should "return template when message is null" in {
     val context  = MockContext()
     val filePath = new File("src/test/resources/nonEmptyFile")
-    when(context.gitCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
+    when(context.gitConfigCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
 
     val sut = new MessageTemplateProvider(context.git, (_, _, _) => context.gitLineHandler, _ => ())
 
@@ -58,7 +58,7 @@ class MessageTemplateProviderTest extends AnyFlatSpec with Matchers with Mockito
   it should "return template when message is empty" in {
     val context  = MockContext()
     val filePath = new File("src/test/resources/nonEmptyFile")
-    when(context.gitCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
+    when(context.gitConfigCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
 
     val sut = new MessageTemplateProvider(context.git, (_, _, _) => context.gitLineHandler, _ => ())
 
@@ -69,7 +69,7 @@ class MessageTemplateProviderTest extends AnyFlatSpec with Matchers with Mockito
   it should "return message when it is not empty (template is ignored)" in {
     val context  = MockContext()
     val filePath = new File("src/test/resources/nonEmptyFile")
-    when(context.gitCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
+    when(context.gitConfigCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
 
     val sut = new MessageTemplateProvider(context.git, (_, _, _) => context.gitLineHandler, _ => ())
 
@@ -78,13 +78,16 @@ class MessageTemplateProviderTest extends AnyFlatSpec with Matchers with Mockito
   }
 
   case class MockContext(
-    git: Git = mock[Git],
-    gitCommandResult: GitCommandResult = mock[GitCommandResult],
-    gitLineHandler: GitLineHandler = mock[GitLineHandler],
-    localChangeList: LocalChangeList = mock[LocalChangeList],
-    project: Project = mock[Project]) {
+      git: Git = mock[Git],
+      gitConfigCommandResult: GitCommandResult = mock[GitCommandResult],
+      gitBranchCommandResult: GitCommandResult = mock[GitCommandResult],
+      gitLineHandler: GitLineHandler = mock[GitLineHandler],
+      localChangeList: LocalChangeList = mock[LocalChangeList],
+      project: Project = mock[Project]
+  ) {
 
-    when(git.runCommand(gitLineHandler)).thenReturn(gitCommandResult)
+    when(gitBranchCommandResult.getOutput).thenReturn(List("").asJava)
+    when(git.runCommand(any[GitLineHandler])).thenReturn(gitConfigCommandResult, gitBranchCommandResult)
     when(project.getProjectFilePath).thenReturn(".")
     when(localChangeList.getComment).thenReturn(null)
   }

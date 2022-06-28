@@ -4,6 +4,8 @@ import com.intellij.openapi.project._
 import com.intellij.openapi.vcs.changes._
 import com.intellij.openapi.vcs.changes.ui._
 import com.telesoftas.ijplugin.gitconfigcommittemplate.MessageTemplateProvider.GitLineHandlerProvider
+import com.telesoftas.ijplugin.gitconfigcommittemplate.taskid.TaskIdInjector.TaskIdSetter
+import git4idea.commands.GitCommand.{BRANCH, CONFIG}
 import git4idea.commands.{Git, GitCommand, GitCommandResult, GitLineHandler}
 
 import java.io.File
@@ -11,22 +13,23 @@ import scala.jdk.CollectionConverters._
 import scala.util.Try
 
 class MessageTemplateProvider(
-  git: => Git,
-  gitLineHandlerProvider: => GitLineHandlerProvider,
-  notificationProducer: String => Unit
+    git: => Git,
+    gitLineHandlerProvider: => GitLineHandlerProvider,
+    notificationProducer: String => Unit
 ) extends CommitMessageProvider {
 
   def this() = this(
     Git.getInstance(),
     new GitLineHandler(_, _, _),
-    message => Notifications.Bus.notify(
-      new Notification(
-        "git config commit.template",
-        "Can not retrieve commit.template",
-        message,
-        NotificationType.INFORMATION,
-      ),
-    ),
+    message =>
+      Notifications.Bus.notify(
+        new Notification(
+          "git config commit.template",
+          "Can not retrieve commit.template",
+          message,
+          NotificationType.INFORMATION
+        )
+      )
   )
 
   override def getCommitMessage(localChangeList: LocalChangeList, project: Project): String = {
@@ -36,10 +39,11 @@ class MessageTemplateProvider(
 
   def getMessageTemplate(project: Project): Option[String] = {
     val template = for {
-      gitCommandResult <- runGitConfigCommitTemplateCommand(project)
-      templatePath     <- gitCommandResult.getOutput.asScala.headOption.toEither("path is missing")
-      template         <- templateFile(project, templatePath).read
-    } yield template
+      templatePath    <- runGitConfigCommitTemplateCommand(project)
+      template        <- templateFile(project, templatePath).read
+      branchName      <- runGitBranchShowCurrent(project)
+      enrichedTemplate = template.setTaskId(branchName)
+    } yield enrichedTemplate
     template match {
       case Right(text) => Some(text)
       case Left(error) =>
@@ -53,14 +57,30 @@ class MessageTemplateProvider(
     if (new File(templatePath).isAbsolute) new File(templatePath)
     else new File(project.getBasePath, templatePath)
 
-  def runGitConfigCommitTemplateCommand(project: Project): Either[Throwable, GitCommandResult] = {
+  def runGitConfigCommitTemplateCommand(project: Project): Either[Throwable, String] =
+    runGitCommand(project, CONFIG, "commit.template", _.getOutput.asScala.headOption.toEither("path is missing"))
+
+  def runGitBranchShowCurrent(project: Project): Either[Throwable, String] =
+    runGitCommand(
+      project,
+      BRANCH,
+      "--show-current",
+      _.getOutput.asScala.headOption.toEither("failed to extract branch")
+    )
+
+  private def runGitCommand(
+      project: Project,
+      gitCommand: GitCommand,
+      mod: String,
+      response: GitCommandResult => Either[Throwable, String]
+  ): Either[Throwable, String] =
     for {
       basePath            <- Option(project.getBasePath).toEither("basePath is not found")
-      configCommitTemplate = gitLineHandlerProvider(project, new File(basePath), GitCommand.CONFIG)
-                               .wrapMutable(_.addParameters("commit.template"))
+      configCommitTemplate = gitLineHandlerProvider(project, new File(basePath), gitCommand)
+                               .wrapMutable(_.addParameters(mod))
       gitCommandResult    <- Try(git.runCommand(configCommitTemplate)).toEither
-    } yield gitCommandResult
-  }
+      responseAsString    <- response(gitCommandResult)
+    } yield responseAsString
 
 }
 
