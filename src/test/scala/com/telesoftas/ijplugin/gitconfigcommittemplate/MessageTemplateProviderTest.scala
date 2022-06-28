@@ -2,7 +2,8 @@ package com.telesoftas.ijplugin.gitconfigcommittemplate
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vcs.changes.LocalChangeList
-import git4idea.commands.{Git, GitCommandResult, GitLineHandler}
+import com.telesoftas.ijplugin.gitconfigcommittemplate.MessageTemplateProvider.GitLineHandlerProvider
+import git4idea.commands.{Git, GitCommand, GitCommandResult, GitLineHandler}
 import org.mockito.{ArgumentMatchersSugar, MockitoSugar}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -15,7 +16,10 @@ class MessageTemplateProviderTest extends AnyFlatSpec with Matchers with Mockito
   "runGitConfigCommitTemplateCommand" should "run with errorless command" in {
     val context = MockContext()
 
-    val sut = new MessageTemplateProvider(context.git, (_, _, _) => context.gitLineHandler, _ => ())
+    val sut      = new MessageTemplateProvider(context.git, (_, _, _) => context.gitLineHandler, _ => ())
+    val filePath = new File("src/test/resources/nonEmptyFile")
+    when(context.gitConfigCommandResult.getOutput).thenReturn(List(filePath.getAbsolutePath).asJava)
+
     sut.runGitConfigCommitTemplateCommand(mock[Project]).toOption shouldBe defined
   }
 
