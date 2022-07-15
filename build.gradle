@@ -19,7 +19,8 @@ repositories {
 }
 
 intellij {
-    version '2020.1'
+    version '2021.1' // native Support for Git commit templates
+//    version '2020.1'
     plugins = ['git4idea']
 }
 

@@ -22,6 +22,6 @@ class RefreshCommitMessageAction(messageTemplateProvider: MessageTemplateProvide
       Refreshable.PANEL_KEY.getData(event.getDataContext) match {
         case i: CommitMessageI => Some(i)
         case _                 => Option(VcsDataKeys.COMMIT_MESSAGE_CONTROL.getData(e.getDataContext))
-      },
+      }
     )
 }

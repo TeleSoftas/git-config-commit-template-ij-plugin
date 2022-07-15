@@ -9,6 +9,9 @@ import git4idea.commands.GitCommand.{BRANCH, CONFIG}
 import git4idea.commands.{Git, GitCommand, GitCommandResult, GitLineHandler}
 
 import java.io.File
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.DurationInt
+import scala.concurrent.{Await, Future}
 import scala.jdk.CollectionConverters._
 import scala.util.Try
 
@@ -60,6 +63,24 @@ class MessageTemplateProvider(
   def runGitConfigCommitTemplateCommand(project: Project): Either[Throwable, String] =
     runGitCommand(project, CONFIG, "commit.template", _.getOutput.asScala.headOption.toEither("path is missing"))
 
+  private def runGitCommand(
+      project: Project,
+      gitCommand: GitCommand,
+      mod: String,
+      response: GitCommandResult => Either[Throwable, String]
+  ): Either[Throwable, String] = {
+    val command = Future(
+      for {
+        basePath            <- Option(project.getBasePath).toEither("basePath is not found")
+        configCommitTemplate = gitLineHandlerProvider(project, new File(basePath), gitCommand)
+                                 .wrapMutable(_.addParameters(mod))
+        gitCommandResult    <- Try(git.runCommand(configCommitTemplate)).toEither
+        responseAsString    <- response(gitCommandResult)
+      } yield responseAsString
+    )
+    Try(Await.result(command, 1.seconds)).toEither.flatten
+  }
+
   def runGitBranchShowCurrent(project: Project): Either[Throwable, String] =
     runGitCommand(
       project,
@@ -67,20 +88,6 @@ class MessageTemplateProvider(
       "--show-current",
       _.getOutput.asScala.headOption.toEither("failed to extract branch")
     )
-
-  private def runGitCommand(
-      project: Project,
-      gitCommand: GitCommand,
-      mod: String,
-      response: GitCommandResult => Either[Throwable, String]
-  ): Either[Throwable, String] =
-    for {
-      basePath            <- Option(project.getBasePath).toEither("basePath is not found")
-      configCommitTemplate = gitLineHandlerProvider(project, new File(basePath), gitCommand)
-                               .wrapMutable(_.addParameters(mod))
-      gitCommandResult    <- Try(git.runCommand(configCommitTemplate)).toEither
-      responseAsString    <- response(gitCommandResult)
-    } yield responseAsString
 
 }
 

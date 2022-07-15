@@ -14,20 +14,22 @@
     <depends>Git4Idea</depends>
 
     <actions>
-        <action id="gitconfigcommittemplate.ReloadTemplate" class="com.telesoftas.ijplugin.gitconfigcommittemplate.RefreshCommitMessageAction"
-                text="Reload Commit Template"
-                description="Load commit message template defined in git config"
-                icon="/refresh.svg">
+        <action id="gitconfigcommittemplate.ReloadTemplate"
+            class="com.telesoftas.ijplugin.gitconfigcommittemplate.RefreshCommitMessageAction"
+            text="Reload Commit Template"
+            description="Load commit message template defined in git config"
+            icon="/refresh.svg">
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
         </action>
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
         <vcs.commitMessageProvider
-                implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.MessageTemplateProvider"/>
+            implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.MessageTemplateProvider"
+            order="first"/>
         <checkinHandlerFactory
-                implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CustomCheckinHandlerFactory"
-                order="last"/>
+            implementation="com.telesoftas.ijplugin.gitconfigcommittemplate.CustomCheckinHandlerFactory"
+            order="first"/>
     </extensions>
 
 </idea-plugin>
